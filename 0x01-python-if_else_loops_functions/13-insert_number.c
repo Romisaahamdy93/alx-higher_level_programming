@@ -20,7 +20,7 @@ new->next = node;
 new = *head;
 return (new);
 }
-while (node && node->next && node->next->n < number)
+while (node && node->next && node->next->n <= number)
 node = node->next;
 new->next = node->next;
 node->next = new;
