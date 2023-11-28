@@ -14,8 +14,7 @@ new = malloc(sizeof(listint_t));
 if (new == NULL)
 return (NULL);
 new->n = number;
-new->next = NULL;
-if (node == NULL || new->n >= number)
+if (node == NULL || node->n >= number)
 {
 new->next = node;
 new = *head;
