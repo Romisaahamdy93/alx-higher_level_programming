@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import sys
 def safe_function(fct, *args):
     try:
@@ -10,5 +9,4 @@ def safe_function(fct, *args):
     except IndexError:
         r = None
         sys.stderr.write("Exception: list index out of range\n")
-    return (r)
-        
+    return r
