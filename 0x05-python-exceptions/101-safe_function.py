@@ -2,11 +2,11 @@
 import sys
 def safe_function(fct, *args):
     try:
-        r = fct(*args)
+        result = fct(*args)
     except ZeroDivisionError:
-        r = None
+        result = None
         sys.stderr.write("Exception: division by zero\n")
     except IndexError:
-        r = None
+        result = None
         sys.stderr.write("Exception: list index out of range\n")
-    return r
+    return result
