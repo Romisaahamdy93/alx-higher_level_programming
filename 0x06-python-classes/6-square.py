@@ -10,12 +10,12 @@ class Square:
 
         Args:
             size: size of Square.
-            position: position of square.
+            position: position of Square.
         """
-        self.size = size
-        self.position = position
+        self.__size = size
+        self.__position = position
 
-         @property
+        @property
     def size(self):
         return self.__size
 
