@@ -12,9 +12,11 @@ class Square:
             size: size of Square.
         """
         self.__size = size
+
+
     @property
     def size(self):
-        """Property for the current size of square."""
+        """Property for current size of square."""
         return self.__size
 
 
