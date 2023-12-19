@@ -5,17 +5,18 @@
 class Square:
     """Defines a square."""
 
-    def __init__(self, size=0):
+    def __init__(self, size=0, position=(0, 0)):
         """Initialization a new Square.
 
         Args:
             size: size of Square.
+            position: position of square.
         """
         self.__size = size
+        self.__position = position
 
     @property
     def size(self):
-        """Property for current size of square."""
         return (self.__size)
 
     @size.setter
@@ -28,7 +29,7 @@ class Square:
 
     @property
     def position(self):
-        return self.__position
+        return (self.__position)
 
     @property.setter
     def position(self, value):
