@@ -1,4 +1,4 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """Module for say_my_name method."""
 
 
@@ -9,7 +9,7 @@ def say_my_name(first_name, last_name=""):
         first_name: first name string.
         last_name: last name string.
 
-     Raises:
+    Raises:
         TypeError: If first_name or last_name are not strings.
     """
     if not isinstance(first_name, str):
