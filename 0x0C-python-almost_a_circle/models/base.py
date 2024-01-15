@@ -1,13 +1,16 @@
 #!/usr/bin/python3
-"""Module for Base class."""
+'''Module for Base class.'''
+from json import dumps, loads
+import csv
+
 
 class Base:
-    """A representation of the base of our OOP hierarchy."""
+    '''A representation of the base of our OOP hierarchy.'''
 
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Constructor."""
+        '''Constructor.'''
         if id is not None:
             self.id = id
         else:
@@ -16,56 +19,47 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        if list_dictionaries is None or len(list_dictionaries) == 0:
-            return '[]'
-
-        return json.dumps(list_dictionaries)
-
-    @classmethod
-    def save_to_file(cls, list_objs):
-        filename = cls.__name__ + '.json'
-
-        with open(filename, mode='w', encoding='utf-8') as f:
-            if list_objs is None:
-                return f.write(cls.to_json_string(None))
-
-            json_attrs = []
-
-            for elem in list_objs:
-                json_attrs.append(elem.to_dictionary())
-
-            return f.write(cls.to_json_string(json_attrs))
+        '''Jsonifies a dictionary so it's quite rightly and longer.'''
+        if list_dictionaries is None or not list_dictionaries:
+            return "[]"
+        else:
+            return dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
-        if json_string is None or len(json_string) == 0:
+        '''Unjsonifies a dictionary.'''
+        if json_string is None or not json_string:
             return []
+        return loads(json_string)
 
-        return json.loads(json_string)
+    @classmethod
+    def save_to_file(cls, list_objs):
+        '''Saves jsonified object to file.'''
+        if list_objs is not None:
+            list_objs = [o.to_dictionary() for o in list_objs]
+        with open("{}.json".format(cls.__name__), "w", encoding="utf-8") as f:
+            f.write(cls.to_json_string(list_objs))
 
     @classmethod
     def create(cls, **dictionary):
-        if cls.__name__ == 'Square':
-            dummy = cls(3)
-
-        if cls.__name__ == 'Rectangle':
-            dummy = cls(3, 3)
-
-        dummy.update(**dictionary)
-        return dummy
+        '''Loads instance from dictionary.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls is Rectangle:
+            new = Rectangle(1, 1)
+        elif cls is Square:
+            new = Square(1)
+        else:
+            new = None
+        new.update(**dictionary)
+        return new
 
     @classmethod
     def load_from_file(cls):
-        filename = cls.__name__ + '.json'
-
-        if path.exists(filename) is False:
+        '''Loads string from file and unjsonifies.'''
+        from os import path
+        file = "{}.json".format(cls.__name__)
+        if not path.isfile(file):
             return []
-
-        with open(filename, mode='r', encoding='utf-8') as f:
-            objs = cls.from_json_string(f.read())
-            instances = []
-
-            for elem in objs:
-                instances.append(cls.create(**elem))
-
-            return instances
+        with open(file, "r", encoding="utf-8") as f:
+            return [cls.create(**d) for d in cls.from_json_string(f.read())]
