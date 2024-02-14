@@ -5,7 +5,7 @@ SELECT
 FROM
     temperatures
 WHERE
-    MONTH(date) IN (7, 8)  -- Filter for July and August
+    month = 7 OR month = 8
 GROUP BY
     city
 ORDER BY
