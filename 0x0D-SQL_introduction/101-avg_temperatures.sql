@@ -3,7 +3,7 @@ SELECT
     city,
     AVG(temperature) AS avg_temp
 FROM
-    temperature_data
+    temperatures
 GROUP BY
     city
 ORDER BY
