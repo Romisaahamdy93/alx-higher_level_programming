@@ -1,8 +1,7 @@
 -- lists all genres in the database hbtn_0d_tvshows_rate by their rating.
-SELECT tv_genres.name, SUM(rating.rate) as rating_sum
+SELECT tv_genres.name, SUM(tv_shows.rating) as rating_sum
 FROM tv_genres
-LEFT JOIN show_genres ON tv_genres.id = show_genres.genre_id
-LEFT JOIN tv_shows ON show_genres.show_id = tv_shows.id
-LEFT JOIN rating ON tv_shows.id = rating.show_id
+JOIN tv_genres_shows ON tv_genres.id = tv_genres_shows.genre_id
+JOIN tv_shows ON tv_genres_shows.show_id = tv_shows.id
 GROUP BY tv_genres.name
-ORDER BY rating_sum DESC, tv_genres.name ASC;
+ORDER BY rating_sum DESC;
