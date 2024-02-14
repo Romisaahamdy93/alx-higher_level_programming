@@ -3,7 +3,7 @@ SELECT
     state,
     MAX(value) AS max_temp
 FROM
-    temperature
+    temperatures
 GROUP BY
     state
 ORDER BY
